@@ -1,51 +1,38 @@
-<?php
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
-include 'Telegram.php';
-require_once 'User.php';
-
-$bot_token = "6218862478:AAEuzoqa2QGdDFSeiP4N3mxo42x0dOj73Ac";
-$telegram = new Telegram($bot_token);
-
-$chat_id = $telegram->ChatID();
-$text = $telegram->Text();
-
-$data = $telegram->getData();
-$message = $data['message'];
-
-$user = new User($chat_id);
-$page = $user->getPage();
-
-if ($text == "/start") {
-    showMainPage();
-} else {
-    switch ($page) {
-        case "main":
-            switch ($text) {
-                case "English 🇺🇸":
-                    showMainPage();
-                    break;
-            }
-            break;
-    }
-}
-
-function showMainPage()
-{
-    global $chat_id, $telegram, $user;
-    $user->setPage("main");
-
-    $text = "Dorixona botiga xush kelibsiz!";
-
-    $options = [
-        [$telegram->buildKeyboardButton("Dorilar ro'yxati 📁"), $telegram->buildKeyboardButton("Dorini qidirish 🔎")],
-    ];
-    $keyboard = $telegram->buildKeyBoard($options, false, true);
-    $content = [
-        'chat_id' => $chat_id,
-        'reply_markup' => $keyboard,
-        'text' => $text,
-    ];
-    $telegram->sendMessage($content);
-}
-
-?>
+    <title>Dori qo'shish</title>
+</head>
+<body>
+<div class="card">
+    <hr>
+    <h1 align="center" class="text text-primary container">Dori qo'shish</h1>
+    <form action="addProduct.php" method="post" class="container">
+        <div class="mb-3">
+            <label for="name" class="form-label">Dori nomi</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Dori tavsifi</label>
+            <input type="text" class="form-control" id="description" name="description" required>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Dori narxi</label>
+            <input type="text" class="form-control" id="price" name="price" required>
+        </div>
+        <div class="mb-3">
+            <label for="count" class="form-label">Dori soni</label>
+            <input type="text" class="form-control" id="count" name="count" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Dori qo'shish</button>
+    </form>
+</body>
+</html>
