@@ -12,8 +12,6 @@
     <title>Dori qo'shish</title>
 </head>
 <body>
-<div class="card">
-    <hr>
     <h1 align="center" class="text text-primary container">Dori qo'shish</h1>
     <form action="addProduct.php" method="post" class="container">
         <div class="mb-3">

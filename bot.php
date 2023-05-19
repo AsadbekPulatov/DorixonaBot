@@ -21,7 +21,10 @@ if ($text == "/start") {
     switch ($page) {
         case "main":
             switch ($text) {
-                case "English 🇺🇸":
+                case "Dorilar ro'yxati 📁":
+                    showList();
+                    break;
+                case "Dorini qidirish 🔎":
                     showMainPage();
                     break;
             }
@@ -39,6 +42,26 @@ function showMainPage()
     $options = [
         [$telegram->buildKeyboardButton("Dorilar ro'yxati 📁"), $telegram->buildKeyboardButton("Dorini qidirish 🔎")],
     ];
+    $keyboard = $telegram->buildKeyBoard($options, false, true);
+    $content = [
+        'chat_id' => $chat_id,
+        'reply_markup' => $keyboard,
+        'text' => $text,
+    ];
+    $telegram->sendMessage($content);
+}
+
+function showList(){
+    global $chat_id, $telegram, $user;
+    $user->setPage("list");
+
+    $text = "Dorilar ro'yxati";
+    $drug = new Drug();
+    $drugs = $drug->getDrugs();
+    $options = [];
+    foreach ($drugs as $item) {
+        $options[] = [$telegram->buildKeyboardButton($item['name'])];
+    }
     $keyboard = $telegram->buildKeyBoard($options, false, true);
     $content = [
         'chat_id' => $chat_id,
