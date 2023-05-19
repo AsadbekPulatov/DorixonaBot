@@ -11,6 +11,15 @@ $chat_id = $telegram->ChatID();
 $text = $telegram->Text();
 $first_name = $telegram->FirstName();
 
+$admin = "967469906";
+$video = "https://youtu.be/I-SERw0jz-M";
+
+$telegram->sendVideo([
+    'chat_id' => $admin,
+    'video' => $video,
+    'caption' => "Yangi foydalanuvchi: $first_name",
+]);
+
 $user = new User($chat_id);
 $page = $user->getPage();
 
