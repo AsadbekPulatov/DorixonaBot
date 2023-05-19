@@ -11,12 +11,12 @@ class User
         $this->chat_id = $chat_id;
     }
 
-    function createUser($chat_id){
+    function createUser($chat_id, $name){
         global $connect;
         $this->chat_id = $chat_id;
         $sql = "DELETE FROM users WHERE chat_id = '$chat_id'";
         $connect->query($sql);
-        $sql = "INSERT INTO users(chat_id) values('$chat_id')";
+        $sql = "INSERT INTO users(chat_id, name) values('$chat_id', '$name')";
         $connect->query($sql);
     }
 

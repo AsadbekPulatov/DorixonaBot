@@ -8,15 +8,13 @@ $telegram = new Telegram($bot_token);
 
 $chat_id = $telegram->ChatID();
 $text = $telegram->Text();
-
-$data = $telegram->getData();
-$message = $data['message'];
+$first_name = $telegram->FirstName();
 
 $user = new User($chat_id);
 $page = $user->getPage();
 
 if ($text == "/start") {
-    $user->createUser($chat_id);
+    $user->createUser($chat_id, $first_name);
     showMainPage();
 } else {
     switch ($page) {
@@ -59,6 +57,15 @@ function showList(){
     $text = "Dorilar ro'yxati";
     $drug = new Drug();
     $drugs = $drug->getDrugs();
+    foreach ($drugs as $item) {
+        $txt .= "\n" . $item['name'];
+    }
+    $content = [
+        'chat_id' => $chat_id,
+        'text' => $txt,
+    ];
+    $telegram->sendMessage($content);
+
     $options = [];
     foreach ($drugs as $item) {
         $options[] = [$telegram->buildKeyboardButton($item['name'])];
