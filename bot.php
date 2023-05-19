@@ -32,6 +32,9 @@ if ($text == "/start") {
         case "search":
             searchDrug($text);
             break;
+        case "result":
+            showDrug($text);
+            break;
     }
 }
 
@@ -56,7 +59,7 @@ function showMainPage()
 
 function showList(){
     global $chat_id, $telegram, $user;
-    $user->setPage("list");
+    $user->setPage("result");
 
     $text = "Dorilar ro'yxati";
     $drug = new Drug();
@@ -88,7 +91,7 @@ function askDrug(){
 
 function searchDrug($name){
     global $chat_id, $telegram, $user;
-    $user->setPage("search");
+    $user->setPage("result");
 
     $text = "Qidiruv natijalari:";
     $drug = new Drug();
@@ -101,6 +104,25 @@ function searchDrug($name){
     $content = [
         'chat_id' => $chat_id,
         'reply_markup' => $keyboard,
+        'text' => $text,
+    ];
+    $telegram->sendMessage($content);
+}
+
+function showDrug($name){
+    global $chat_id, $telegram, $user;
+    $user->setPage("result");
+
+    $text = "Dori haqida ma'lumot:";
+    $drug = new Drug();
+    $drugs = $drug->searchDrug($name);
+    $drug = $drugs[0];
+    $text .= "\nNomi: " . $drug['name'];
+    $text .= "\nQo'llanilishi: " . $drug['description'];
+    $text .= "\nNarxi: " . $drug['price'];
+    $text .= "\nSoni: " . $drug['quantity'];
+    $content = [
+        'chat_id' => $chat_id,
         'text' => $text,
     ];
     $telegram->sendMessage($content);
