@@ -16,6 +16,7 @@ $user = new User($chat_id);
 $page = $user->getPage();
 
 if ($text == "/start") {
+    $user->createUser($chat_id);
     showMainPage();
 } else {
     switch ($page) {
