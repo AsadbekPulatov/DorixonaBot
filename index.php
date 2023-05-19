@@ -19,18 +19,9 @@ if ($text == "/start") {
     showMainPage();
 } else {
     switch ($page) {
-        case "language":
+        case "main":
             switch ($text) {
                 case "English 🇺🇸":
-                    $user->setLanguage("eng");
-                    showMainPage();
-                    break;
-                case "Русский 🇷🇺":
-                    $user->setLanguage("ru");
-                    showMainPage();
-                    break;
-                case "O'zbek tili 🇺🇿":
-                    $user->setLanguage("uz");
                     showMainPage();
                     break;
             }
@@ -46,7 +37,7 @@ function showMainPage()
     $text = "Dorixona botiga xush kelibsiz!";
 
     $options = [
-        [$telegram->buildKeyboardButton("Dorilar ro'yxati 📁"), $telegram->buildKeyboardButton("Dorini qidirish 💊")],
+        [$telegram->buildKeyboardButton("Dorilar ro'yxati 📁"), $telegram->buildKeyboardButton("Dorini qidirish 🔎")],
     ];
     $keyboard = $telegram->buildKeyBoard($options, false, true);
     $content = [
