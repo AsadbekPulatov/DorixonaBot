@@ -7,7 +7,7 @@ global $connect;
 $sql = "CREATE TABLE users (
     chat_id VARCHAR(30) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    page VARCHAR(30) NOT NULL,
+    page VARCHAR(30) NOT NULL
     )";
 
 if ($connect->query($sql) === TRUE) {
@@ -21,7 +21,7 @@ $sql = "CREATE TABLE products (
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
     price VARCHAR(30) NOT NULL,
-    count VARCHAR(30) NOT NULL,
+    count VARCHAR(30) NOT NULL
     )";
 
 if ($connect->query($sql) === TRUE) {
