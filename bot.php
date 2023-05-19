@@ -2,6 +2,7 @@
 
 include 'Telegram.php';
 require_once 'User.php';
+require_once 'Drug.php';
 
 $bot_token = "6218862478:AAEuzoqa2QGdDFSeiP4N3mxo42x0dOj73Ac";
 $telegram = new Telegram($bot_token);
@@ -57,15 +58,6 @@ function showList(){
     $text = "Dorilar ro'yxati";
     $drug = new Drug();
     $drugs = $drug->getDrugs();
-    foreach ($drugs as $item) {
-        $txt .= "\n" . $item['name'];
-    }
-    $content = [
-        'chat_id' => $chat_id,
-        'text' => $txt,
-    ];
-    $telegram->sendMessage($content);
-
     $options = [];
     foreach ($drugs as $item) {
         $options[] = [$telegram->buildKeyboardButton($item['name'])];
