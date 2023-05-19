@@ -119,8 +119,8 @@ function showDrug($name){
     $drug = $drugs[0];
     $text .= "\nNomi: " . $drug['name'];
     $text .= "\nQo'llanilishi: " . $drug['description'];
-    $text .= "\nNarxi: " . $drug['price'];
-    $text .= "\nSoni: " . $drug['quantity'];
+    $text .= "\nNarxi: " . $drug['price']." so'm";
+    $text .= "\nSoni: " . $drug['count']." ta";
     $content = [
         'chat_id' => $chat_id,
         'text' => $text,
