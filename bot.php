@@ -25,9 +25,12 @@ if ($text == "/start") {
                     showList();
                     break;
                 case "Dorini qidirish 🔎":
-                    showMainPage();
+                    askDrug();
                     break;
             }
+            break;
+        case "search":
+            searchDrug($text);
             break;
     }
 }
@@ -58,6 +61,37 @@ function showList(){
     $text = "Dorilar ro'yxati";
     $drug = new Drug();
     $drugs = $drug->getDrugs();
+    $options = [];
+    foreach ($drugs as $item) {
+        $options[] = [$telegram->buildKeyboardButton($item['name'])];
+    }
+    $keyboard = $telegram->buildKeyBoard($options, false, true);
+    $content = [
+        'chat_id' => $chat_id,
+        'reply_markup' => $keyboard,
+        'text' => $text,
+    ];
+    $telegram->sendMessage($content);
+}
+
+function askDrug(){
+    global $chat_id, $telegram, $user;
+    $user->setPage("search");
+
+    $text = "Dori nomini kiriting";
+    $content = [
+        'chat_id' => $chat_id,
+        'text' => $text,
+    ];
+}
+
+function searchDrug($name){
+    global $chat_id, $telegram, $user;
+    $user->setPage("search");
+
+    $text = "Dorini qidirish";
+    $drug = new Drug();
+    $drugs = $drug->searchDrug($name);
     $options = [];
     foreach ($drugs as $item) {
         $options[] = [$telegram->buildKeyboardButton($item['name'])];
