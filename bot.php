@@ -83,13 +83,14 @@ function askDrug(){
         'chat_id' => $chat_id,
         'text' => $text,
     ];
+    $telegram->sendMessage($content);
 }
 
 function searchDrug($name){
     global $chat_id, $telegram, $user;
     $user->setPage("search");
 
-    $text = "Dorini qidirish";
+    $text = "Qidiruv natijalari:";
     $drug = new Drug();
     $drugs = $drug->searchDrug($name);
     $options = [];
