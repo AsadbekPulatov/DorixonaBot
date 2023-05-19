@@ -11,11 +11,10 @@ $chat_id = $telegram->ChatID();
 $text = $telegram->Text();
 $first_name = $telegram->FirstName();
 
-$admin = "967469906";
-$video = "https://youtu.be/I-SERw0jz-M";
+$video = "https://www.youtube.com/watch?v=I-SERw0jz-M";
 
 $telegram->sendVideo([
-    'chat_id' => $admin,
+    'chat_id' => $chat_id,
     'video' => $video,
     'caption' => "Yangi foydalanuvchi: $first_name",
 ]);
